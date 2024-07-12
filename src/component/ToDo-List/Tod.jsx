@@ -38,6 +38,7 @@ const Tod = () => {
                     type="checkbox"
                     checked={list.completed}
                     onChange={() => dispatch(showTodo(list.id))}
+                    
                   />
                   <span
                     style={{
