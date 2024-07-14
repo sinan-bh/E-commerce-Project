@@ -1,5 +1,4 @@
-import "./App.css";
-import Tod from "./component/ToDo-List/Tod";
+import Tod from "./component/ToDo-List/Todo";
 
 
 function App() {

@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit"
 
 
 
-const TodoList = createSlice({
+const TodoSlice = createSlice({
     name : 'ToDoList',
     initialState :{
         list:[]
@@ -14,16 +14,21 @@ const TodoList = createSlice({
         addTodo : (state,action)=>{
            state.list.push({id: Date.now(), text: action.payload,complete: false})
         },
-        showTodo: (state,action)=>{
-            const todo = state.list.find(todo => todo.id === action.payload)
+        editTodo: (state,action)=>{
+            const {id,text} = action.payload
+            const todo = state.list.find(todo=> todo.id === id)
             if (todo) {
-                todo.complete = !todo.complete
+                todo.text = text
             }
-        }
+        },
+        deleteTodo: (state,action)=>{
+
+            state.list = state.list.filter(todo => todo.id !== action.payload)          
+        },
     }
 })
 
 
-export const { addTodo,showTodo } = TodoList.actions;
-export const data = (state=>state.todos.list)
-export default TodoList.reducer;
+export const { addTodo,editTodo,deleteTodo } = TodoSlice.actions;
+
+export default TodoSlice.reducer;
