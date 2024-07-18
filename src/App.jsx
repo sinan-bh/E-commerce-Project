@@ -1,12 +1,14 @@
 import Products from "./component/Products/Products";
-import Tod from "./component/ToDo-List/Home";
+import Tod from "./component/Home/Home";
 import ProductsItems from "./component/Products/ProductsItems";
 
 import { Routes, Route } from "react-router-dom";
 
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import NavBar from "./component/nav-footer/NavBar";
-import Home from "./component/ToDo-List/Home";
+import Home from "./component/Home/Home";
+import Login from "./component/Login-Registration/Login";
+import Registration from "./component/Login-Registration/Registration";
 
 function App() {
   return (
@@ -22,6 +24,8 @@ function App() {
           <Route path="/products/electronics" element={<Products type='electronics' />} />
         </Route>
         <Route path="/products/:id" element={<ProductsItems />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/registration" element={<Registration />} />
       </Routes>
     </>
   );
