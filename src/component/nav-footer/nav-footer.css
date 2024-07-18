@@ -1,0 +1,44 @@
+/* Navbar.css */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgba(180, 193, 194, 0.886);
+    padding: 10px;
+    color: rgb(26, 22, 22);
+  }
+  
+  .navbar-logo {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .navbar-menu {
+    display: flex;
+    align-items: center;
+  }
+
+  .navbar-items{
+    display: flex;
+    
+  }
+  
+  .navbar-item {
+    position: relative;
+    padding: 10px 15px;
+    cursor: pointer;
+  }
+  
+  .navbar-item a {
+    color: rgb(24, 20, 20);
+    text-decoration: none;
+  }
+  
+  
+  @media (max-width: 900px) {
+    .navbar-menu {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+  
