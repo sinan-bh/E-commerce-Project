@@ -41,4 +41,37 @@
       align-items: flex-start;
     }
   }
+
+  .cart-log{
+    display: flex;
+    align-items: center;
+    
+  }
+
+  .cart-log .cart{
+    margin-right: 20px;
+    width: 50px;
+    height: 35px;
+    border-radius: 10px;
+    background-color: rgb(53, 166, 134);
+    border: double;
+    color: aliceblue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .buttonLogout{
+    width: fit-content;
+    height: 35px;
+    border-radius: 10px;
+    background-color: rgb(53, 166, 134);
+    border: double;
+    color: aliceblue;
+    
+  }
+  .buttonLogout a{
+    text-decoration: none;
+    color: aliceblue;
+  }
   

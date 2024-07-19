@@ -1,9 +1,24 @@
 import React from "react";
+import { FaUserCheck } from "react-icons/fa";
+import { FaUser } from "react-icons/fa";
+import { FaCartShopping } from "react-icons/fa6";
 
-import "./nav-footer.css";
 import { Link } from "react-router-dom";
 
+import "./nav-footer.css";
+
 const NavBar = () => {
+
+  const isUser = JSON.parse(localStorage.getItem('isUser'))
+  const usrData = JSON.parse(localStorage.getItem('registrationData'))
+
+  const handleLogout = () => {
+    const userConfirmed = window.confirm("Are you sure you want to Logout?");
+    if (userConfirmed) {
+      localStorage.removeItem('isUser')
+  }
+}
+
   return (
     <nav className="navbar">
       <div className="navbar-logo">Logo</div>
@@ -29,7 +44,16 @@ const NavBar = () => {
           </div>
         </div>
       </div>
-      <div className="navbar-item"><Link to={'/login'}>Login</Link></div>
+      <div className="cart-log">
+      <div>
+        <button className="cart"><FaCartShopping /></button>
+      </div>
+      {isUser ?(
+        <button className="buttonLogout" onClick={handleLogout}><FaUserCheck />{usrData.name}</button >
+      ) : (
+      <button className="buttonLogout"><Link to={'/login'}><FaUser />Login</Link></button>
+    )}
+    </div>
     </nav>
   );
 };
