@@ -8,9 +8,14 @@ const ProductsSlice = createSlice({
     initialState: {
         products: [],
         status: 'idle',
-        error: null
+        error: null,
+        userDatas: [],
     },
-    reducers:{},
+    reducers:{
+        currentUser: (state,action)=>{
+            state.userDatas = action.payload
+        }
+    },
     extraReducers: (builder)=>{
         builder
         .addCase(FetchApi.pending, (state)=>{
@@ -27,6 +32,6 @@ const ProductsSlice = createSlice({
     }
 })
 
-// export const {} = ProductsSlice.actions
+export const {currentUser} = ProductsSlice.actions
 
 export default ProductsSlice.reducer

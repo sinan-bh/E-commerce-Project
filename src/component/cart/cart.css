@@ -1,0 +1,136 @@
+.shopping-cart {
+    display: flex;
+    justify-content: space-between;
+    padding: 50px 20px ;
+    height: 100vh;
+    margin: 100px 50px;
+    background-color: #f5f5f5;
+    font-family: Arial, sans-serif;
+  }
+  
+  .cart-items {
+    display: grid;
+    grid-template-columns: 70% 30%;
+    
+  }
+  
+  .cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    padding: 30px;
+    width: 750px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+  }
+  
+  .item-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  .item-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-right: 20px;
+  }
+  
+  .item-details {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .item-details h3 {
+    margin: 0 0 5px;
+  }
+  
+  .item-details p {
+    margin: 2px 0;
+    color: #555;
+  }
+  
+  .item-price, .item-quantity, .item-total {
+    flex: 1;
+    text-align: center;
+  }
+  
+  .item-quantity {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .item-quantity button {
+    padding: 5px 10px;
+    margin: 0 10px;
+    background-color: #ddd;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .item-quantity span {
+    min-width: 20px;
+    text-align: center;
+  }
+  
+  .remove-item {
+    padding: 5px 10px;
+    background-color: #ff4d4d;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 8px;
+  }
+  
+  .cart-summary {
+    width: 300px;
+    height: 500px;
+    background-color: #f8e1da;
+    padding: 20px;
+    border-radius: 8px;
+    margin-left: 25px;
+
+  }
+  
+  .cart-summary h2 {
+    margin-top: 0;
+  }
+  
+  .cart-summary p {
+    color: #555;
+  }
+  
+  .terms {
+    margin: 20px 0;
+  }
+  
+  .terms input {
+    margin-right: 10px;
+  }
+  
+  .checkout-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+  
+  .paypal-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #fff;
+    color: #0070ba;
+    border: 2px solid #0070ba;
+    cursor: pointer;
+    border-radius: 8px;
+  }
+  

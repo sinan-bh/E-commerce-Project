@@ -9,6 +9,8 @@ import NavBar from "./component/nav-footer/NavBar";
 import Home from "./component/Home/Home";
 import Login from "./component/Login-Registration/Login";
 import Registration from "./component/Login-Registration/Registration";
+import Footer from "./component/nav-footer/Footer";
+import Cart from "./component/cart/cart";
 
 function App() {
   return (
@@ -26,7 +28,9 @@ function App() {
         <Route path="/products/:id" element={<ProductsItems />} />
         <Route path="/login" element={<Login />} />
         <Route path="/registration" element={<Registration />} />
+        <Route path="/shopingcart" element={<Cart />} />
       </Routes>
+      <Footer />
     </>
   );
 }

@@ -1,5 +1,68 @@
-.home{
-    background-image: url('https://github.com/sinan-bh/Furnicture-E-commerce/blob/main/src/assets/img/Home/Home.png?raw=true');
-    height: 700px;
-    width: 100%;
+.hero-section {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-img {
+  display: flex;
+  background: pink;
+}
+
+.hero-image {
+  width: 25%;
+  height: 100vh;
+  background-position: center;
+  background-size: cover;
+}
+
+.hero-content {
+  text-align: center;
+  border-radius: 10px;
+  max-width: 550px;
+  height: auto;
+  background: #fff;
+  padding: 1rem 2rem;
+  opacity: 0.7;
+  color: #120c0c;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.hero-content p {
+  font-size: 1.25rem;
+  margin-bottom: 30px;
+}
+
+.btn-group {
+  margin-bottom: 1rem;
+}
+.btn-group .btn {
+  margin: 0 10px;
+  padding: 0.75rem 1.5rem;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.btn-secondary {
+  background-color: rgb(249, 168, 182);
+  color: black;
+  font-weight: bold;
+  border: 1px solid #fff;
 }

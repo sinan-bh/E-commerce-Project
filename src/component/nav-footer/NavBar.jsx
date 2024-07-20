@@ -1,59 +1,107 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaUserCheck } from "react-icons/fa";
 import { FaUser } from "react-icons/fa";
 import { FaCartShopping } from "react-icons/fa6";
+import { currentUser } from "../Redux/ProductsSlice";
 
 import { Link } from "react-router-dom";
 
-import "./nav-footer.css";
+import "./nav.css";
+import { useDispatch, useSelector } from "react-redux";
 
 const NavBar = () => {
+  const [show, setShow] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(window.scrollY);
 
-  const isUser = JSON.parse(localStorage.getItem('isUser'))
-  const usrData = JSON.parse(localStorage.getItem('registrationData'))
+  const users = useSelector((state) => state.Products.userDatas);
+
+  const dispatch = useDispatch();
+
+  const user = JSON.parse(localStorage.getItem("registrationData"));
+
+  const handleScroll = () => {
+    if (window.scrollY > lastScrollY) {
+      setShow(false);
+    } else {
+      setShow(true);
+    }
+    setLastScrollY(window.scrollY);
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [lastScrollY]);
+
+  useEffect(() => {
+    dispatch(currentUser(user));
+  }, [dispatch]);
+
+  const isUser = JSON.parse(localStorage.getItem("isUser"));
 
   const handleLogout = () => {
     const userConfirmed = window.confirm("Are you sure you want to Logout?");
     if (userConfirmed) {
-      localStorage.removeItem('isUser')
-  }
-}
+      localStorage.removeItem("isUser");
+      dispatch(currentUser(null));
+    }
+  };
 
   return (
-    <nav className="navbar">
-      <div className="navbar-logo">Logo</div>
-      <div className="navbar-menu">
-        <div className="navbar-items">
-          <div className="navbar-item">
-            <Link to={'/'}>Home</Link>
+    <nav className={`navbar ${show ? "navbar-show" : "navbar-hide"}`}>
+      <div className="navbar-brand">Logo</div>
+      <div className=" ">
+        <div className="navbar-links">
+          <div className="nav-link">
+            <Link to={"/"}>Home</Link>
           </div>
-          <div className="navbar-item">
-            <Link to={'/products'}>All Products</Link>
+          <div className="nav-link">
+            <Link to={"/products"}>All Products</Link>
           </div>
-          <div className="navbar-item">
-            <Link to={'/products/men'}>Men</Link>
+          <div className="nav-link">
+            <Link to={"/products/men"}>Men</Link>
           </div>
-          <div className="navbar-item">
-            <Link to={'products/women'}>Women</Link>
+          <div className="nav-link">
+            <Link to={"products/women"}>Women</Link>
           </div>
-          <div className="navbar-item">
-            <Link to={'/products/electronics'}>Electronics</Link>
+          <div className="nav-link">
+            <Link to={"/products/electronics"}>Electronics</Link>
           </div>
-          <div className="navbar-item">
-            <Link to={'/products/jewelery'}>Jewelry</Link>
+          <div className="nav-link">
+            <Link to={"/products/jewelery"}>Jewelry</Link>
           </div>
         </div>
       </div>
       <div className="cart-log">
-      <div>
-        <button className="cart"><FaCartShopping /></button>
+        <div>
+          {!isUser ? (
+            <div></div>
+          ) : (
+            <Link to={"/shopingcart"}>
+              <button className="nav-link btn-login">
+                <FaCartShopping />
+              </button>
+            </Link>
+          )}
+        </div>
+        {isUser ? (
+          <button className="nav-link btn-join" onClick={handleLogout}>
+            <Link>
+              <FaUserCheck />
+              {users.name}
+            </Link>
+          </button>
+        ) : (
+          <button className=" btn-join">
+            <Link to={"/login"} className="nav-link">
+              <FaUser />
+              Login
+            </Link>
+          </button>
+        )}
       </div>
-      {isUser ?(
-        <button className="buttonLogout" onClick={handleLogout}><FaUserCheck />{usrData.name}</button >
-      ) : (
-      <button className="buttonLogout"><Link to={'/login'}><FaUser />Login</Link></button>
-    )}
-    </div>
     </nav>
   );
 };

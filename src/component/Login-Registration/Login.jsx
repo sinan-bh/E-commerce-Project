@@ -1,23 +1,37 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import './login-registration.css'
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { currentUser } from "../Redux/ProductsSlice";
 
 
 
 const Login = () => {
 
-  const usrData = localStorage.getItem('registrationData')
-  const usrDatas =JSON.parse(usrData);
+
+  const users = useSelector(state => state.Products.userDatas)
+  const dispatch = useDispatch()
+  const usrData = JSON.parse(localStorage.getItem('registrationData'))
+
+  console.log(usrData);
+
+  
+  
+  
+  
   const navigate = useNavigate()
   const [usrLogin,setUsrLogin] = useState({
     email: '',
     pass:'',
   })
+  const user = usrData.find(list=> list.email === usrLogin.email && list.pass === usrLogin.pass)
   const [errors, setErrors] = useState({});
 
 
+
   const handleChange = (e) => {
+    e.preventDefault()
     const {name,value} = e.target;
     setUsrLogin({...usrLogin, [name]: value})
   }
@@ -46,14 +60,15 @@ const Login = () => {
       return;
     }
     try {
-      if (usrDatas) {
-        if (usrDatas.email === usrLogin.email && usrDatas.pass === usrLogin.pass) {
+      // if (usrData) {
+        if (user) {
+          dispatch(currentUser(user))
           localStorage.setItem('isUser',JSON.stringify(true))
           navigate('/');
         }else{
           alert("Your email or password invalid")
         }
-      }
+      // }
     } catch (error) {
       console.error("Error saving to localStorage", error);
     }
