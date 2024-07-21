@@ -40,6 +40,7 @@ const Registration = () => {
       const registrations = existingData ? JSON.parse(existingData) : [];
       registrations.push(usrRegistration);
       localStorage.setItem('registrationData', JSON.stringify(registrations));
+      localStorage.setItem('isRegister', JSON.stringify(true));
       navigate('/login');
     } catch (error) {
       console.error("Error saving to localStorage", error);

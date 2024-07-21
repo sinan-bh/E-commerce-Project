@@ -12,13 +12,15 @@ import { useDispatch, useSelector } from "react-redux";
 const NavBar = () => {
   const [show, setShow] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(window.scrollY);
+  const [userData,setUserData] = useState([])
 
   const users = useSelector((state) => state.Products.userDatas);
 
   const dispatch = useDispatch();
 
-  const user = JSON.parse(localStorage.getItem("registrationData"));
+ 
 
+ 
   const handleScroll = () => {
     if (window.scrollY > lastScrollY) {
       setShow(false);
@@ -36,8 +38,14 @@ const NavBar = () => {
   }, [lastScrollY]);
 
   useEffect(() => {
-    dispatch(currentUser(user));
+    if (isUser) {
+      const user = JSON.parse(localStorage.getItem("registrationData"));
+      const currentUserData = user.find(list => list.id);
+      setUserData(currentUserData);
+      dispatch(currentUser(userData));
+    }
   }, [dispatch]);
+
 
   const isUser = JSON.parse(localStorage.getItem("isUser"));
 
@@ -48,6 +56,7 @@ const NavBar = () => {
       dispatch(currentUser(null));
     }
   };
+
 
   return (
     <nav className={`navbar ${show ? "navbar-show" : "navbar-hide"}`}>

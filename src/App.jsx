@@ -11,6 +11,7 @@ import Login from "./component/Login-Registration/Login";
 import Registration from "./component/Login-Registration/Registration";
 import Footer from "./component/nav-footer/Footer";
 import Cart from "./component/cart/cart";
+import Prd from "./component/Products/Prd";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/registration" element={<Registration />} />
         <Route path="/shopingcart" element={<Cart />} />
+        <Route path="/prd" element={<Prd />} />
       </Routes>
       <Footer />
     </>

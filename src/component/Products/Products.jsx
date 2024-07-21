@@ -15,47 +15,42 @@ function Products({ type }) {
     dispatch(FetchApi());
   }, [dispatch]);
 
-  console.log(products);
   const category =
     type === "all"
       ? products
       : products.filter((list) => list.category === type);
 
   return (
-    <div className="category">
-      <div className=" m-5">
-        <h2 className="product-name">Products</h2>
-        <div className="product-structure">
-          <div className="products">
-            {category.map((list) => (
-              <div key={list.id} className="border-product">
-                <Link to={`/products/${list.id}`}>
-                  <div className="image-product">
-                    <img
-                      src={list.image}
-                      alt={list.category}
-                      className=" category-image"
-                    />
-                    <div className="zindex">dhjd</div>
-                  </div>
-                </Link>
-                <div className="product-title-price">
-                  <h4 className="product-title">{list.title}</h4>
-                  <div>
-                    <h5 className="text-success">$ {list.price}</h5>
-                    <small>
-                      {/* <h6 className="text-danger">Rate {list.rating.rate}</h6> */}
-                    </small>
-                  </div>
-                </div>
-                {/* <hr /> */}
-              </div>
+    <div className="productsName">
+      <h1>
+        {type === 'all' && 'All Products' } 
+        {type === "men's clothing" && 'Mens Clothing'}
+        {type === "women's clothing" && 'Womens Clothing'}
+        {type === "jewelery" && 'Jewalry'}
+        {type === "electronics" && 'Electronics'}
+      </h1>
+    <div className="product-list">
+      {category.map((product) => (
+        <div key={product.id} className="product-card">
+          <img src={product.image} alt={product.title} className="product-image" />
+          <h5 className="product-title">{product.title}</h5>
+          <p className="product-price">${product.price}</p>
+          <div className="product-rating">
+            {[...Array(5)].map((_, i) => (
+              <span
+                key={i}
+                className="star"
+                style={{ color: i < product.rating.rate ? '#ffcc00' : '#e4e5e9' }}
+              >
+                &#9733;
+              </span>
             ))}
           </div>
         </div>
-      </div>
+      ))}
+    </div>
     </div>
   );
-}
+};
 
 export default Products;
