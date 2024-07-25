@@ -15,11 +15,11 @@ const NavBar = () => {
   const [userData,setUserData] = useState([])
 
   const users = useSelector((state) => state.Products.userDatas);
+  const {cart} = useSelector((state) => state.Products);
 
   const dispatch = useDispatch();
 
- 
-
+  const cartCount = Object.keys(cart).map(list=> list).length
  
   const handleScroll = () => {
     if (window.scrollY > lastScrollY) {
@@ -88,9 +88,9 @@ const NavBar = () => {
           {!isUser ? (
             <div></div>
           ) : (
-            <Link to={"/shopingcart"}>
+            <Link to={"/shopingcart"} className="cart-link">
               <button className="nav-link btn-login">
-                <FaCartShopping />
+                <FaCartShopping /><a className="cartcount">{cartCount}</a>
               </button>
             </Link>
           )}

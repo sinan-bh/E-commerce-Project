@@ -16,7 +16,6 @@ const ProductsItems = () => {
 
   const item = products.map((item) => item);
   const items = item.find((list) => list.id == productID.id);
-  console.log(items);
 
   return (
     <div>

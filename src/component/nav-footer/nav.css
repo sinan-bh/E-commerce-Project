@@ -65,6 +65,10 @@
     top: 15px;
     right: 15px;
   }
+
+  .cart-link{
+    text-decoration: none;
+  }
   
   .btn-login {
     padding: 0.5rem 1rem;
@@ -75,6 +79,10 @@
     margin-right: 20px;
     display: flex;
     align-items: center;
+  }
+
+  .cartcount{
+    margin-left: 2px;
   }
   
   .btn-join {

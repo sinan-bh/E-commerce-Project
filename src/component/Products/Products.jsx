@@ -3,12 +3,17 @@ import { useEffect } from "react";
 import FetchApi from "../FetchApi/FetchApi";
 import { useDispatch, useSelector } from "react-redux";
 
+import { addToCart } from "../Redux/ProductsSlice";
+
+import { MdOutlineShoppingCart } from "react-icons/md";
+
 import { Link } from "react-router-dom";
 
 import "./Products.css";
 
 function Products({ type }) {
   const { products } = useSelector((state) => state.Products);
+  const { cart } = useSelector((state) => state.Products);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -32,6 +37,7 @@ function Products({ type }) {
     <div className="product-list">
       {category.map((product) => (
         <div key={product.id} className="product-card">
+          <MdOutlineShoppingCart className="cart-icon" onClick={()=>dispatch(addToCart(product.id))}/>
           <img src={product.image} alt={product.title} className="product-image" />
           <h5 className="product-title">{product.title}</h5>
           <p className="product-price">${product.price}</p>

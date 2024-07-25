@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
 import FetchApi from "../FetchApi/FetchApi"
+import cart from "../cart/cart"
 
 
 
@@ -10,11 +11,25 @@ const ProductsSlice = createSlice({
         status: 'idle',
         error: null,
         userDatas: [],
+        cart: {},
+        count:{},
+        
     },
     reducers:{
         currentUser: (state,action)=>{
             state.userDatas = action.payload
+        },
+        addToCart: (state,action) => {
+            // if (action.payload === 1) {
+                
+            //     state.cart = {...state.cart, [action.payload] : action.payload + 1}
+            // }
+            state.cart ={...state.cart, [action.payload] : 1}
+        },
+        handleRemoveItem:(state,action) => {
+            state.cart = {...state.cart, [action.payload] : 0 }
         }
+        
     },
     extraReducers: (builder)=>{
         builder
@@ -32,6 +47,6 @@ const ProductsSlice = createSlice({
     }
 })
 
-export const {currentUser} = ProductsSlice.actions
+export const {currentUser,addToCart,handleRemoveItem} = ProductsSlice.actions
 
 export default ProductsSlice.reducer
