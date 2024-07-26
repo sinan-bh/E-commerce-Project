@@ -1,103 +1,99 @@
 import React, { useEffect, useState } from "react";
 
 import FetchApi from "../FetchApi/FetchApi";
-import { handleRemoveItem } from "../Redux/ProductsSlice";
+import {
+  handleRemoveItem,
+  CartDecrement,
+  addToCart,
+} from "../Redux/ProductsSlice";
 
 import "./cart.css";
 import { useDispatch, useSelector } from "react-redux";
 // import { addToCart, increment } from "../Redux/ProductsSlice";
 
 const cart = () => {
-
   const { products } = useSelector((state) => state.Products);
   const { cart } = useSelector((state) => state.Products);
+  const { count } = useSelector((state) => state.Products);
   const dispatch = useDispatch();
 
-  const [cartItem,setCartItems] = useState([])
-  const [cartTotalPrice,setCartTotalPrice] = useState([])
-  const [cartTotalCount,setCartTotalCount] = useState([])
+  const [cartItem, setCartItems] = useState([]);
+  const [cartTotalPrice, setCartTotalPrice] = useState([]);
+  const [cartTotalCount, setCartTotalCount] = useState([]);
 
-  
-  
-  
+  // console.log(count);
+
   useEffect(() => {
-    setCartItems(cart)
+    setCartItems(cart);
     dispatch(FetchApi());
-  }, [dispatch]);
+  }, [dispatch, cart]);
 
-  const increment = (id) => {
-    
-    setCartItems(prev=> {return { ...prev, [id]: prev[id] + 1 }})
-  }
-  const decrement = (id) => {
-    
-    setCartItems(prev=> {return prev[id] > 1 ? { ...prev, [id]: prev[id] - 1 } : { ...prev, [id]: prev[id] = 1 } })
-  }
-
- 
   console.log(cartItem);
 
-  useEffect(()=>{
+  useEffect(() => {
+    const totalCount = Object.keys(cartItem).reduce(
+      (total, cart) => total + cartItem[cart],
+      0
+    );
 
-    const totalCount = Object.keys(cart).reduce((total,cart)=> total + cartItem[cart] ,0)
-  
-    const totalPrice = Object.keys(cart).reduce((total, id) => {
-      const price = products.find(
-        (value) => value.id === Number(id)
-      )?.price;
-      return total + cartItem[id] * price;
-    }, 0).toFixed(2);
+    const totalPrice = Object.keys(cartItem)
+      .reduce((total, id) => {
+        const price = products.find((value) => value.id === Number(id))?.price;
+        return total + cartItem[id] * price;
+      }, 0)
+      .toFixed(2);
+    console.log(totalCount);
 
-    setCartTotalCount(totalCount)
-    setCartTotalPrice(totalPrice)
-  },[])
-
-
+    setCartTotalCount(totalCount);
+    setCartTotalPrice(totalPrice);
+  }, [cartItem]);
 
   return (
     <div className="shopping-cart">
       <div className="cart-items">
         <div>
-
-        {products.map((item) =>{
-          if (cart[item.id]) {
-            return (
-              <div key={item.id} className="cart-item">
-                <div className="item-info">
-                  <img src={item.image} alt={item.name} className="item-image" />
-                  <div className="item-details">
-                    <h3>{item.name}</h3>
-                    {/* <p>{item.price}</p> */}
-                    <p>Size: {item.size}</p>
-                    <p>Color: {item.color}</p>
+          {products.map((item) => {
+            if (cart[item.id]) {
+              return (
+                <div key={item.id} className="cart-item">
+                  <div>
+                    <h3>{item.title}</h3>
+                    <div className="item-body">
+                      <div className="item-info">
+                        <img
+                          src={item.image}
+                          alt={item.title}
+                          className="item-image"
+                        />
+                      </div>
+                      {/* <div className="item-price">${item.price.toFixed(2)}</div> */}
+                      <div className="item-quantity">
+                        <button
+                          onClick={() => dispatch(CartDecrement(item.id))}
+                        >
+                          -
+                        </button>
+                        <span>{cartItem[item.id]}</span>
+                        <button onClick={() => dispatch(addToCart(item.id))}>
+                          +
+                        </button>
+                      </div>
+                      <div className="item-total">
+                        ${(item.price * cartItem[item.id]).toFixed(2)}
+                      </div>
+                      <button
+                        className="remove-item"
+                        onClick={() => dispatch(handleRemoveItem(item.id))}
+                      >
+                        x
+                      </button>
+                    </div>
                   </div>
                 </div>
-                <div className="item-price">${item.price.toFixed(2)}</div>
-                <div className="item-quantity">
-                  <button
-                    onClick={() => decrement(item.id)}
-                  >
-                    -
-                  </button>
-                  <span>{cartItem[item.id]}</span>
-                  <button onClick={() => increment(item.id)}>
-                    +
-                  </button>
-                </div>
-                <div className="item-total">
-                  ${(item.price * cartItem[item.id]).toFixed(2)}
-                </div>
-                <button
-                  className="remove-item"
-                  onClick={() => dispatch(handleRemoveItem(item.id))}
-                >
-                  x
-                </button>
-              </div>
-            )
-          }
-          return null
-        })}
+              );
+            }
+            return null;
+          })}
         </div>
         <div>
           <div className="cart-summary">

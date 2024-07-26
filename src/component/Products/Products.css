@@ -21,20 +21,27 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
   background-color: white;
+  transition: all ease 0.4s;
   transition: transform 0.2s;
+
 }
 
-.product-card:hover {
-  transform: scale(1.05);
+.product-card:hover .cart-icon {
+  opacity: 1;
+  
 }
-
+.product-card:hover{
+  transform: scale(0.9);
+}
 .cart-icon{
+  transition: all ease 0.4s;
   margin-left: 200px;
-  transition: transform 0.2s;
+  opacity: 0;
 }
 
 .cart-icon:hover{
-  transform: scale(1.2);
+  transform: scale(1.4);
+  
 }
 
 .product-image {
