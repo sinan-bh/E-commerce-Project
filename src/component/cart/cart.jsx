@@ -12,23 +12,25 @@ import { useDispatch, useSelector } from "react-redux";
 // import { addToCart, increment } from "../Redux/ProductsSlice";
 
 const cart = () => {
-  const { products } = useSelector((state) => state.Products);
-  const { cart } = useSelector((state) => state.Products);
-  const { count } = useSelector((state) => state.Products);
+  const { products,cart } = useSelector((state) => state.Products);
   const dispatch = useDispatch();
 
   const [cartItem, setCartItems] = useState([]);
   const [cartTotalPrice, setCartTotalPrice] = useState([]);
   const [cartTotalCount, setCartTotalCount] = useState([]);
+  const [isCart,setIsCart] = useState(false)
 
   // console.log(count);
 
   useEffect(() => {
     setCartItems(cart);
     dispatch(FetchApi());
+
+    if (cartItem) {
+      setIsCart(true)
+    }
   }, [dispatch, cart]);
 
-  console.log(cartItem);
 
   useEffect(() => {
     const totalCount = Object.keys(cartItem).reduce(
@@ -50,6 +52,7 @@ const cart = () => {
 
   return (
     <div className="shopping-cart">
+      {isCart ? (
       <div className="cart-items">
         <div>
           {products.map((item) => {
@@ -109,6 +112,9 @@ const cart = () => {
           </div>
         </div>
       </div>
+      ) : (
+        <div>No items</div>
+      )} 
     </div>
   );
 };

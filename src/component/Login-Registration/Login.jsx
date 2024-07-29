@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 
-import "./login-registration.css";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { currentUser } from "../Redux/ProductsSlice";
 
+import "./login-registration.css";
+
 const Login = () => {
-  const users = useSelector((state) => state.Products.userDatas);
   const dispatch = useDispatch();
   const usrData = JSON.parse(localStorage.getItem("registrationData"));
   const isRegister = JSON.parse(localStorage.getItem("isRegister"));
@@ -28,7 +28,7 @@ const Login = () => {
         )
       );
     }
-  }, []);
+  }, [usrLogin]);
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -59,7 +59,7 @@ const Login = () => {
       return;
     }
     try {
-      if (isRegister) {
+      if (user) {
         dispatch(currentUser(user));
         localStorage.setItem("isUser", JSON.stringify(true));
         navigate("/");

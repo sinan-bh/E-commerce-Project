@@ -14,12 +14,17 @@ const NavBar = () => {
   const [lastScrollY, setLastScrollY] = useState(window.scrollY);
   const [userData,setUserData] = useState([])
 
-  const users = useSelector((state) => state.Products.userDatas);
+  const {userDatas} = useSelector((state) => state.Products);
   const {cart} = useSelector((state) => state.Products);
 
-  const dispatch = useDispatch();
+  console.log(userDatas);
 
-  const cartCount = Object.keys(cart).map(list=> list).length
+  const dispatch = useDispatch();
+  
+
+  const cartCount = Object.keys(cart).length
+
+  console.log(cartCount);
  
   const handleScroll = () => {
     if (window.scrollY > lastScrollY) {
@@ -99,7 +104,7 @@ const NavBar = () => {
           <button className="nav-link btn-join" onClick={handleLogout}>
             <Link>
               <FaUserCheck />
-              {users.name}
+              {userDatas.name}
             </Link>
           </button>
         ) : (
