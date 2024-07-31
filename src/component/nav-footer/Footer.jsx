@@ -1,16 +1,28 @@
-import React from 'react';
-import './nav.css';
+import React from "react";
+
+import { IoHomeOutline } from "react-icons/io5";
+import { FaInstagram } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
+
+import "./nav.css";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
     <footer className="footer">
       <div className="footer-content">
-        <p>Logos:</p>
         <div className="logos">
-          <span className="logo">Logo1</span>
-          <span className="logo">Logo2</span>
-          <span className="logo">Logo3</span>
-          <span className="logo">Logo4</span>
+          <span className="logo">
+            <Link to={"/"}>
+              <IoHomeOutline />
+            </Link>
+          </span>
+          <span className="logo">
+            <FaInstagram />
+          </span>
+          <span className="logo">
+            <FaXTwitter />
+          </span>
         </div>
       </div>
     </footer>

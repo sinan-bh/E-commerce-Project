@@ -105,15 +105,17 @@
   /* Footer */
 
   .footer {
-    background-color: transparent;
-    color: #fff;
+    color: #211a1a;
     padding: 1rem 0;
     text-align: center;
+    background: #5654542d;
+
   }
   
   .footer-content {
     max-width: 1200px;
     margin: 0 auto;
+
   }
   
   .logos {
@@ -124,7 +126,6 @@
   
   .logo {
     padding: 0.5rem;
-    background-color: #333;
     border-radius: 5px;
   }
   
