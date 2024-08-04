@@ -100,13 +100,6 @@ const Login = () => {
               onChange={handleChange}
             />
             {errors.email && <div className="text-danger">{errors.pass}</div>}
-            <div className="actions">
-              <label>
-                <input type="checkbox" />
-                Remember me
-              </label>
-              <a href="/">Forgot password?</a>
-            </div>
             <div className="buttons">
               <button
                 type="button"
